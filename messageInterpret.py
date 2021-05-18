@@ -60,14 +60,23 @@ class ReportSet:
 class PerformControl:
     TV = 0
     def __init__(self, in_bytes):
+       pass
+
+    
+    def decode(self, in_bytes):
         self.raw_bytes = in_bytes
         decoded = cbor.loads(in_bytes)
         AC_raw = cbor.loads(in_bytes[1:])
         self.TV = decoded
-        pass
+        
+
+    @classmethod
+    def from_bytes(cls, in_bytes):
+        cls = PerformControl()
+        cls.decode(in_bytes)
 
     def __str__(self):
-        return ""
+        return f"Perform Control: TV: {TV}\t  "
 
 class Message:
     flags = {}
